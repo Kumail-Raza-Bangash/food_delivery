@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/widgets/big_text.dart';
@@ -15,7 +16,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   PageController pageController = PageController(viewportFraction: 0.85);
 
-  var _currentPageValue = 0.0;
+  var _currPageValue = 0.0;
   double _scaleFactor = 0.8;
   double _height = 220; 
 
@@ -24,7 +25,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     super.initState();
     pageController.addListener(() {
       setState(() {
-        _currentPageValue = pageController.page!;
+        _currPageValue = pageController.page!;
       });
     });
   }
@@ -37,15 +38,31 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //color: Colors.red,
-      height: 320,
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: 5,
-        itemBuilder: (context, position){
-          return _buildPageItem(position);
-        }),
+    return Column(
+      children: [
+        Container(
+          //color: Colors.red,
+          height: 320,
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: 5,
+            itemBuilder: (context, position){
+              return _buildPageItem(position);
+            }),
+        ),
+
+        DotsIndicator(
+          dotsCount: 5,
+          position: _currPageValue,
+          decorator: DotsDecorator(
+            activeColor: AppColors.mainColor,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          ),
+        ),
+        
+      ],
     );
   }
 
@@ -53,19 +70,19 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
     Matrix4 matrix = new Matrix4.identity();
 
-    if (index == _currentPageValue.floor()){
-      var currScale = 1 - (_currentPageValue-index) * (1 - _scaleFactor);
+    if (index == _currPageValue.floor()){
+      var currScale = 1 - (_currPageValue-index) * (1 - _scaleFactor);
       var currTrans = _height * (1-currScale)/2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, currTrans, 0);
     }
-    else if (index == _currentPageValue.floor()+1){
-      var currScale = _scaleFactor + (_currentPageValue-index+1) * (1 - _scaleFactor);
+    else if (index == _currPageValue.floor()+1){
+      var currScale = _scaleFactor + (_currPageValue-index+1) * (1 - _scaleFactor);
       var currTrans = _height * (1-currScale)/2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1);
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, currTrans, 0);
     }
-    else if (index == _currentPageValue.floor()-1){
-      var currScale = 1 - (_currentPageValue-index) * (1 - _scaleFactor);
+    else if (index == _currPageValue.floor()-1){
+      var currScale = 1 - (_currPageValue-index) * (1 - _scaleFactor);
       var currTrans = _height * (1-currScale)/2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1);
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, currTrans, 0);
