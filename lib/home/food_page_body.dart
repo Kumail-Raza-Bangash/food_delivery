@@ -43,7 +43,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       children: [
         Container(
           //color: Colors.red,
-          height: 320,
+          height: Dimensions.pageView,
           child: PageView.builder(
             controller: pageController,
             itemCount: 5,
@@ -100,9 +100,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           Container(
           height: Dimensions.pageViewContainer,
-          margin: const EdgeInsets.only(left: 10, right: 10),
+          margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(Dimensions.radius30),
             color: index.isEven?const Color(0xFF69c5df): const Color(0xFF9294cc),
             image: const DecorationImage(
               fit: BoxFit.cover,
@@ -115,9 +115,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           alignment: Alignment.bottomCenter,
           child: Container(
             height: Dimensions.pageViewTextContainer,
-            margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+            margin: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width30, bottom: Dimensions.height30),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(Dimensions.radius20),
               color: Colors.white,
               boxShadow: const [
                 BoxShadow(
@@ -136,14 +136,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ]
             ),
             child: Container(
-              padding: EdgeInsets.only(top: 15, left: 15, right: 15),
+              padding: EdgeInsets.only(top: Dimensions.height15, left: 15, right: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
       
                   BigText(text: "Chinese Side"),
       
-                  const SizedBox(height: 10,),
+                  SizedBox(height: Dimensions.height10,),
       
                   Row(
                     children: [
@@ -169,7 +169,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     ],
                   ),
       
-                  const SizedBox(height: 20,),
+                  SizedBox(height: Dimensions.height20,),
       
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
