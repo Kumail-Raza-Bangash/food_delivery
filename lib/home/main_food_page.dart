@@ -45,7 +45,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                         borderRadius: BorderRadius.circular(Dimensions.radius15),
                         color: AppColors.mainColor,
                       ),
-                      child: Icon(Icons.search, color: Colors.white,),
+                      child: Icon(Icons.search, color: Colors.white, size: Dimensions.iconSize24,),
                     ),
                   ),
                 ],
