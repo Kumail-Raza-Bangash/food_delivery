@@ -29,9 +29,14 @@ class Dimensions {
    static double radius20 = screenHieght / 46.25; // 925/20
    static double radius30 = screenHieght / 30.83; // 925/30
 
+   //icons Sizes
    static double iconSize24 = screenHieght / 38.54; // 925/24
+   static double iconSize16 = screenHieght / 57.81; // 925/16
  
    //list view size
    static double listViewImgSize = screenWidth / 3.51; // 421/120
    static double listViewTextCountSize = screenWidth / 4.21; // 421/100
+
+   //popular food detail
+      static double popularFoodImgSize = screenHieght / 2.64; // 925/350
 }
