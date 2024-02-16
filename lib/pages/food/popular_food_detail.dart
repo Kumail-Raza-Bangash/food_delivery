@@ -4,6 +4,7 @@ import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_column.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/big_text.dart';
+import 'package:food_delivery/widgets/expandable_text_widget.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   const PopularFoodDetail({super.key});
@@ -14,6 +15,7 @@ class PopularFoodDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          //background Image
           Positioned(
             left: 0,
             right: 0,
@@ -29,6 +31,7 @@ class PopularFoodDetail extends StatelessWidget {
             ),
           ),
 
+          //SHowing two icons
           Positioned(
             top: Dimensions.height45,
             left: Dimensions.width20,
@@ -42,6 +45,7 @@ class PopularFoodDetail extends StatelessWidget {
             )
           ),
 
+          //introduction of food
           Positioned(
             left: 0,
             right: 0,
@@ -63,10 +67,19 @@ class PopularFoodDetail extends StatelessWidget {
                   const AppColumn(text: 'Chinese Side',),
                   SizedBox(height: Dimensions.height20,),
                   BigText(text: "Introduce"),
+                  SizedBox(height: Dimensions.height20,),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: ExpandableTextWidget(
+                        text: "Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling."),
+                      ),
+                    ),
                 ],
               ),
             ),
           ),
+
+          //expandable text widgets
 
         ],
       ),
