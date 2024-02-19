@@ -16,7 +16,7 @@ class RecommendedFoodDetail extends StatelessWidget {
         slivers: [
           SliverAppBar(
             toolbarHeight: 80,
-            title: Row(
+            title: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppIcon(icon: Icons.clear),
@@ -55,7 +55,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               children: [
                 Container(
                   margin: EdgeInsets.only(left: Dimensions.width20, right:  Dimensions.width20,),
-                  child: ExpandableTextWidget(
+                  child: const ExpandableTextWidget(
                     text: "Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling.Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling.Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling.Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling.",
                   ),
                 ),
@@ -114,7 +114,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.favorite,
                     color: AppColors.mainColor,
                   ),

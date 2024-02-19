@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/small_text.dart';
@@ -40,7 +39,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
     return Container(
       child: secondHalf.isEmpty?SmallText(height: 1.5, color: AppColors.paraColor, size: Dimensions.font16, text: firstHalf):Column(
         children: [
-          SmallText(height: 1.5, color: AppColors.paraColor, size: Dimensions.font16, text: hiddenText?(firstHalf+"..."): (firstHalf + secondHalf)),
+          SmallText(height: 1.5, color: AppColors.paraColor, size: Dimensions.font16, text: hiddenText?("$firstHalf..."): (firstHalf + secondHalf)),
           InkWell(
             onTap: (){
               setState(() {

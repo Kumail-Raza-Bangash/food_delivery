@@ -20,41 +20,39 @@ class _MainFoodPageState extends State<MainFoodPage> {
         children: [
           //header 
           Container(
-            child: Container(
-              margin: EdgeInsets.only(top: Dimensions.height45, bottom: Dimensions.height15),
-              padding: EdgeInsets.only(right: Dimensions.width20, left: Dimensions.width20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      BigText(text: "Pakistan", color: AppColors.mainColor,),
-                      Row(
-                        children: [
-                          SmallText(text: "Punjab", color: Colors.black45,),
-                          const Icon(Icons.arrow_drop_down_rounded)
-                        ],
-                      )
-                    ],
-                  ),
-                  Center(
-                    child: Container(
-                      width: Dimensions.width45,
-                      height: Dimensions.height45,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius15),
-                        color: AppColors.mainColor,
-                      ),
-                      child: Icon(Icons.search, color: Colors.white, size: Dimensions.iconSize24,),
+            margin: EdgeInsets.only(top: Dimensions.height45, bottom: Dimensions.height15),
+            padding: EdgeInsets.only(right: Dimensions.width20, left: Dimensions.width20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    BigText(text: "Pakistan", color: AppColors.mainColor,),
+                    Row(
+                      children: [
+                        SmallText(text: "Punjab", color: Colors.black45,),
+                        const Icon(Icons.arrow_drop_down_rounded)
+                      ],
+                    )
+                  ],
+                ),
+                Center(
+                  child: Container(
+                    width: Dimensions.width45,
+                    height: Dimensions.height45,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius15),
+                      color: AppColors.mainColor,
                     ),
+                    child: Icon(Icons.search, color: Colors.white, size: Dimensions.iconSize24,),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
 
           // body
-          Expanded(
+          const Expanded(
             child: SingleChildScrollView(
               child: FoodPageBody(),
             ),

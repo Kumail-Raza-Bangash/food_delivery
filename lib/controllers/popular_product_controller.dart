@@ -13,7 +13,8 @@ class PopularProductController extends GetxController {
     Response response = await popularProductRepo.getPopularProductList();
 
     if (response.statusCode == 200){
-      //print('Got data');
+      // ignore: avoid_print
+      print('Got data');
       _popularProductList = []; // if we don't initialize as null, then out data will be repeated
       _popularProductList.addAll(Product.fromJson(response.body).products); // here we need to pass our model class
       update(); // getx udpate i.e setstate()

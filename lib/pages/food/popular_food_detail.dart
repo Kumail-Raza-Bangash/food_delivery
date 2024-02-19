@@ -22,7 +22,7 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               width: double.maxFinite,
               height: Dimensions.popularFoodImgSize,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage('assets/image/food0.png'))
@@ -68,7 +68,7 @@ class PopularFoodDetail extends StatelessWidget {
                   SizedBox(height: Dimensions.height20,),
                   BigText(text: "Introduce"),
                   SizedBox(height: Dimensions.height20,),
-                  Expanded(
+                  const Expanded(
                     child: SingleChildScrollView(
                       child: ExpandableTextWidget(
                         text: "Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling."),
@@ -104,11 +104,11 @@ class PopularFoodDetail extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.remove, color: AppColors.signColor,),
+                  const Icon(Icons.remove, color: AppColors.signColor,),
                   SizedBox(width: Dimensions.width10/2,),
                   BigText(text: "0"),
                   SizedBox(width: Dimensions.width10/2,),
-                  Icon(Icons.add, color: AppColors.signColor,),
+                  const Icon(Icons.add, color: AppColors.signColor,),
                 ],
               ),
             ),
