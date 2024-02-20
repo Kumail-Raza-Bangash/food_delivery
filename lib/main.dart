@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery/helper/dependencies.dart' as dep;
 
@@ -24,11 +25,9 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Food Delivery',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MainFoodPage(),
+      home: MainFoodPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }
