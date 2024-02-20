@@ -110,7 +110,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 10,
+            itemCount: recommendedProduct.recommendedProductList.length,
             itemBuilder: (context, index){
               return Container(
                 margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20, bottom: Dimensions.height10),
@@ -124,9 +124,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(Dimensions.radius20),
                           color: Colors.white38,
-                          image: const DecorationImage(
+                          image:  DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/image/food0.png'),
+                            image: NetworkImage(AppConstant.BASE_URL+AppConstant.UPLOAD_URL+recommendedProduct.recommendedProductList[index].img!),
                           ),
                         ),
                       ),
@@ -235,7 +235,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             color: index.isEven?const Color(0xFF69c5df): const Color(0xFF9294cc),
             image: DecorationImage(
               fit: BoxFit.cover,
-              image:  NetworkImage(AppConstant.BASE_URL+"/uploads/"+popularProduct.img!)
+              image:  NetworkImage(AppConstant.BASE_URL+AppConstant.UPLOAD_URL+popularProduct.img!)
             ),
           ),
         ),
