@@ -5,14 +5,14 @@ class ApiClient extends GetConnect implements GetxService {
   final String appBaseUrl;
 
   // ignore: unused_field
-  late Map<String, String> _mainHeader;
+  late Map<String, String> _mainHeaders;
   
   ApiClient({required this.appBaseUrl}){
     baseUrl = appBaseUrl;
     timeout = const Duration(seconds: 30);
     token = "";
     
-    _mainHeader = {
+    _mainHeaders = {
       'Content-type' : 'application/json; charset=UTF-8',
       'Autherization' : 'Bearer $token',
     };

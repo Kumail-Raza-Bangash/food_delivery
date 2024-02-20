@@ -1,4 +1,5 @@
-// ignore_for_file: unused_field, unnecessary_this
+
+// ignore_for_file: unused_field
 
 class Product {
   int? _totalSize;
@@ -21,7 +22,7 @@ class Product {
     if (json['products'] != null) {
       _products = <ProductModel>[];
       json['products'].forEach((v) {
-        _products!.add(ProductModel.fromJson(v)); //remove !
+        _products.add(ProductModel.fromJson(v)); //remove !
       });
     }
   }
