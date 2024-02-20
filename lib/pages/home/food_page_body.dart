@@ -54,17 +54,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Container(
             //color: Colors.red,
             height: Dimensions.pageView,
-            child: GestureDetector(
-              onTap: (){
-                Get.toNamed(RouteHelper.getPopularFood());
+            child: PageView.builder(
+              controller: pageController,
+              itemCount: popularProducts.popularProductList.length,
+              itemBuilder: (context, position){
+                return _buildPageItem(position, popularProducts.popularProductList[position]);
               },
-              child: PageView.builder(
-                controller: pageController,
-                itemCount: popularProducts.popularProductList.length,
-                itemBuilder: (context, position){
-                  return _buildPageItem(position, popularProducts.popularProductList[position]);
-                },
-              ),
             ),
           ) 
           : 
@@ -238,20 +233,25 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-          height: Dimensions.pageViewContainer,
-          margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Dimensions.radius30),
-            color: index.isEven?const Color(0xFF69c5df): const Color(0xFF9294cc),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image:  NetworkImage(AppConstant.BASE_URL+AppConstant.UPLOAD_URL+popularProduct.img!)
+          GestureDetector(
+            onTap: () {
+               Get.toNamed(RouteHelper.getPopularFood(index));
+            },
+            child: Container(
+            height: Dimensions.pageViewContainer,
+            margin: EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimensions.radius30),
+              color: index.isEven?const Color(0xFF69c5df): const Color(0xFF9294cc),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image:  NetworkImage(AppConstant.BASE_URL+AppConstant.UPLOAD_URL+popularProduct.img!)
+              ),
             ),
+                    ),
           ),
-        ),
       
-        Align(
+          Align(
           alignment: Alignment.bottomCenter,
           child: Container(
             height: Dimensions.pageViewTextContainer,
