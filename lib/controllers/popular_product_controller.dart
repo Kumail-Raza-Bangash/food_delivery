@@ -9,6 +9,9 @@ class PopularProductController extends GetxController {
   List<dynamic> _popularProductList = [];
   List<dynamic> get popularProductList => _popularProductList;
 
+  bool _isLoaded = false;
+  bool get isLoaded => _isLoaded;
+
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
 
@@ -17,6 +20,7 @@ class PopularProductController extends GetxController {
       _popularProductList = []; // if we don't initialize as null, then out data will be repeated
       _popularProductList.addAll(Product.fromJson(response.body).products); // here we need to pass our model class
       //print(_popularProductList);
+      _isLoaded = true;
       update(); // getx udpate i.e setstate()
     }
     else{
