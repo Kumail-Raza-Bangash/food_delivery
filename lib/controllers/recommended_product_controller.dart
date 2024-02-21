@@ -17,7 +17,7 @@ class RecommendedProductController extends GetxController {
     Response response = await recommendedProductRepo.getRecommendedProductList();
 
     if (response.statusCode == 200){
-      print('Got Recommemnded data');
+      //print('Got Recommemnded data');
       _recommendedProductList = []; // if we don't initialize as null, then out data will be repeated
       _recommendedProductList.addAll(Product.fromJson(response.body).products); // here we need to pass our model class
       //print(_recommended ProductList);

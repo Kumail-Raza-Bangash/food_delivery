@@ -20,8 +20,7 @@ class PopularFoodDetail extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var product = Get.find<PopularProductController>().popularProductList[pageId];
-    //print("page id: "+ pageId.toString());
-    //print("product name: "+ product.name.toString());
+    Get.find<PopularProductController>().initProduct();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -103,7 +102,9 @@ class PopularFoodDetail extends StatelessWidget {
 
         ],
       ),
-      bottomNavigationBar: Container(
+
+      bottomNavigationBar: GetBuilder<PopularProductController>(builder: (popularProduct){
+        return Container(
         height: Dimensions.bottomHeightBar,
         padding: EdgeInsets.only(top: Dimensions.height30, left: Dimensions.width20, right: Dimensions.width20,),
         decoration: BoxDecoration(
@@ -124,11 +125,21 @@ class PopularFoodDetail extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.remove, color: AppColors.signColor,),
+                  GestureDetector(
+                    onTap: (){
+                      popularProduct.setQuanitity(false);
+                    },
+                    child: const Icon(Icons.remove, color: AppColors.signColor,),
+                  ),
                   SizedBox(width: Dimensions.width10/2,),
-                  BigText(text: "0"),
+                  BigText(text: popularProduct.quantity.toString()),
                   SizedBox(width: Dimensions.width10/2,),
-                  const Icon(Icons.add, color: AppColors.signColor,),
+                  GestureDetector(
+                    onTap: (){
+                      popularProduct.setQuanitity(true);
+                    },
+                    child: const Icon(Icons.add, color: AppColors.signColor,)
+                  ),
                 ],
               ),
             ),
@@ -144,7 +155,8 @@ class PopularFoodDetail extends StatelessWidget {
           
           ],
         ),
-      ),
+      );
+      })
     );
   }
 }
