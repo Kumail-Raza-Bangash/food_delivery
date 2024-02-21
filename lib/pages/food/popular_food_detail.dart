@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
+import 'package:food_delivery/utils/app_constants.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_column.dart';
@@ -11,16 +12,16 @@ import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
 
-  int pageId;
+  final int pageId;
 
-  PopularFoodDetail({super.key, required this.pageId});
+  const PopularFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
 
     var product = Get.find<PopularProductController>().popularProductList[pageId];
-    print("page id: "+ pageId.toString());
-    print("product name: "+ product.name.toString());
+    //print("page id: "+ pageId.toString());
+    //print("product name: "+ product.name.toString());
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -33,10 +34,10 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               width: double.maxFinite,
               height: Dimensions.popularFoodImgSize,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/image/food0.png'))
+                  image: NetworkImage(AppConstant.BASE_URL+AppConstant.UPLOAD_URL+product.img!))
               ),
 
             ),
@@ -83,14 +84,14 @@ class PopularFoodDetail extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AppColumn(text: 'Chinese Side',),
+                  AppColumn(text: product.name!,),
                   SizedBox(height: Dimensions.height20,),
                   BigText(text: "Introduce"),
                   SizedBox(height: Dimensions.height20,),
-                  const Expanded(
+                  Expanded(
                     child: SingleChildScrollView(
                       child: ExpandableTextWidget(
-                        text: "Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling. Chicken meat is traditionally marinated prior to cooking to improve tenderness, flavor and increase shelf life. Marination is a process of infusing a solution of water, salt and other ingredients, such as phosphates and is done by injection or tumbling."),
+                        text: product.description!),
                       ),
                     ),
                 ],
@@ -138,7 +139,7 @@ class PopularFoodDetail extends StatelessWidget {
                 color: AppColors.mainColor,
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
               ),
-              child: BigText(text: "\$10 | Add to cart", color: Colors.white,),
+              child: BigText(text: "\$${product.price!} | Add to cart", color: Colors.white,),
             ),
           
           ],
