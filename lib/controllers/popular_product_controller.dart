@@ -20,8 +20,8 @@ class PopularProductController extends GetxController {
   int _quantity = 0;
   int get quantity => _quantity;
 
-  int _inCartItem = 0;
-  int get inCartItem => _inCartItem + _quantity;
+  int _inCartItems = 0;
+  int get inCartItems => _inCartItems + _quantity;
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
@@ -69,17 +69,31 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initProduct(CartController cart){
+  void initProduct(ProductModel product, CartController cart){
     _quantity = 0;
-    _inCartItem = 0;
+    _inCartItems = 0;
     _cart = cart;
+
+    var exist = false;
+    exist = _cart.existInCart(product);
     //if exist
     //get from storage _inCartItems
+    print("Exist or not: "+exist.toString());
+    if(exist){
+      _inCartItems = _cart.getQuantity(product);
+      print("The quantity in cart is: "+_inCartItems.toString());
+    }
   }
 
   void addItem (ProductModel product){
     if(_quantity>0){
       _cart.addItem(product, _quantity);
+      _quantity = 0;
+
+      _cart.items.forEach((key, value) {
+        print("The id is: "+value.id.toString()+" The quantity is: "+value.quantity.toString());
+      });
+
     }
     else {
       Get.snackbar("Iterm Count", "You should at least at an item in the cart",

@@ -21,7 +21,7 @@ class PopularFoodDetail extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var product = Get.find<PopularProductController>().popularProductList[pageId];
-    Get.find<PopularProductController>().initProduct(Get.find<CartController>());
+    Get.find<PopularProductController>().initProduct(product, Get.find<CartController>());
 
     return Scaffold(
       backgroundColor: Colors.white,
