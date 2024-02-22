@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Food Delivery',
-      home: MainFoodPage(),
+      home: const MainFoodPage(),
       initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
     );
