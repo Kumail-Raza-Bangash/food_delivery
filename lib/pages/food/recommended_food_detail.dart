@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/pages/cart/cart_page.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/app_constants.dart';
 import 'package:food_delivery/utils/colors.dart';
@@ -36,7 +37,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   onTap: () {
                     Get.toNamed(RouteHelper.getInitial());
                   },
-                  child: AppIcon(icon: Icons.arrow_back_ios)
+                  child: const AppIcon(icon: Icons.arrow_back_ios)
                 ),
                 //AppIcon(icon: Icons.shopping_cart_outlined),
                 GetBuilder<PopularProductController>(builder: (controller){
@@ -46,14 +47,19 @@ class RecommendedFoodDetail extends StatelessWidget {
 
                       Get.find<PopularProductController>().totalItems >= 1 
                       ?
-                      const Positioned(
+                      Positioned(
                         right: 0,
                         top: 0,
-                        child: AppIcon(
-                          icon: Icons.circle, 
-                          size: 20, 
-                          iconColor: Colors.transparent, 
-                          backgroundColor: AppColors.mainColor,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => const CartPage());
+                          },
+                          child: const AppIcon(
+                            icon: Icons.circle, 
+                            size: 20, 
+                            iconColor: Colors.transparent, 
+                            backgroundColor: AppColors.mainColor,
+                          ),
                         ),
                       ) 
                       : 
