@@ -44,6 +44,51 @@ class CartPage extends StatelessWidget {
               ],
             )
           ),
+
+          Positioned(
+            top: Dimensions.height20*5,
+            left: Dimensions.width20,
+            right: Dimensions.width20,
+            bottom: 0,
+            child: Container(
+              //color: Colors.yellow,
+              margin: EdgeInsets.only(top: Dimensions.width15),
+              child: MediaQuery.removePadding(
+                context: context,
+                removeTop: true,
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (_, index){
+                    return Container(
+                      height: Dimensions.height20*5,
+                      width: double.maxFinite,
+                      margin: EdgeInsets.only(bottom: Dimensions.width10),
+                
+                      child: Row(
+                        children: [
+                          Container(
+                            height: Dimensions.height20*5,
+                            width: Dimensions.height20*5,
+                            margin: EdgeInsets.only(right: Dimensions.width10/2),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  'assets/image/food0.png'
+                                  )
+                              ),
+                              borderRadius: BorderRadius.circular(Dimensions.radius20)
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+              ),
+            )
+          ),
+
+
         ],
       ),
     );
