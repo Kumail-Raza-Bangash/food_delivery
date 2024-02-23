@@ -84,13 +84,15 @@ class CartPage extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                var popularIndex = Get.find<PopularProductController>().popularProductList.indexOf(_cartList[index].product!);
+                                var popularIndex = Get.find<PopularProductController>().
+                                popularProductList.indexOf(_cartList[index].product!);
 
                                 if(popularIndex>=0){
-                                  Get.toNamed(RouteHelper.getPopularFood(popularIndex));
+                                  Get.toNamed(RouteHelper.getPopularFood(popularIndex, "cart-page"));
                                 }
                                 else {
-                                  var recommendedIndex = Get.find<RecommendedProductController>().recommendedProductList.indexOf(_cartList[index].product!);
+                                  var recommendedIndex = Get.find<RecommendedProductController>().
+                                  recommendedProductList.indexOf(_cartList[index].product!);
                                   Get.toNamed(RouteHelper.getRecommendedFood(recommendedIndex));
                                 }
                               },
