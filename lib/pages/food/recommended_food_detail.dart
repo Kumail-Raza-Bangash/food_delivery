@@ -59,10 +59,10 @@ class RecommendedFoodDetail extends StatelessWidget {
                     
                         Get.find<PopularProductController>().totalItems >= 1 
                         ?
-                        Positioned(
+                        const Positioned(
                           right: 0,
                           top: 0,
-                            child: const AppIcon(
+                            child: AppIcon(
                               icon: Icons.circle, 
                               size: 20, 
                               iconColor: Colors.transparent, 
