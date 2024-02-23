@@ -33,6 +33,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.6
   dots_indicator: ^2.0.0 # position: we can pass double value to position of DotsIndicator,
+  persistent_bottom_nav_bar: ^5.0.2
 
 dev_dependencies:
   flutter_test:
