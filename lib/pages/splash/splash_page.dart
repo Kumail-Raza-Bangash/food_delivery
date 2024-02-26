@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/routes/route_helper.dart';
+import 'package:food_delivery/utils/dimensions.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -53,8 +54,23 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(child: Image.asset("assets/image/logo part 1.png", width: 250,),),
-          Center(child: Image.asset("assets/image/logo part 2.png", width: 250,),),
+          ScaleTransition(
+            scale: animation,
+            child: Center(
+              child: Image.asset(
+                "assets/image/logo part 1.png", 
+                width: Dimensions.splashImg,
+              ),
+            ),
+          ),
+
+          Center(
+            child: Image.asset(
+              "assets/image/logo part 2.png", 
+              width: Dimensions.splashImg,
+            ),
+          ),
+
         ],
       ),
     );
