@@ -5,6 +5,7 @@ import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/big_text.dart';
+import 'package:food_delivery/widgets/small_text.dart';
 import 'package:get/get.dart';
 
 class CartHistory extends StatelessWidget {
@@ -67,6 +68,7 @@ class CartHistory extends StatelessWidget {
                   children: [
                     for(int i=0; i<itemsPerOrder.length; i++)
                       Container(
+                        height: 120,
                         margin: EdgeInsets.only(bottom: Dimensions.height20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,6 +76,7 @@ class CartHistory extends StatelessWidget {
                             BigText(text: "Time"),
                             SizedBox(height: Dimensions.height10,),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Wrap(
                                   direction: Axis.horizontal,
@@ -99,7 +102,33 @@ class CartHistory extends StatelessWidget {
                                     :
                                     Container();
                                   }),
-                                )
+                                ),
+
+                                Container(
+                                  height: 80,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      SmallText(text: "Total", color: AppColors.titleColor,),
+                                      BigText(text: itemsPerOrder[i].toString()+" Items", color: AppColors.titleColor,),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: Dimensions.width10,
+                                          vertical: Dimensions.height10/2,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(Dimensions.radius15/3),
+                                          border: Border.all(width: 1, color: AppColors.mainColor),
+
+                                        ),
+                                        child: SmallText(text: "one more", color: AppColors.mainColor,),
+                                      )
+                                    ],
+                                  ),
+                                ),
+
+
                               ],
                             )
                           ],
