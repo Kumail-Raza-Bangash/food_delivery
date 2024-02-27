@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/pages/cart/cart_history.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
 import 'package:food_delivery/utils/colors.dart';
 //import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   List pages = [
     MainFoodPage(),
     Container(child: Center(child: Text("Page 1"),),),
-    Container(child: Center(child: Text("Page 2"),),),
+    CartHistory(),
     Container(child: Center(child: Text("Page 3"),),),
   ];
 

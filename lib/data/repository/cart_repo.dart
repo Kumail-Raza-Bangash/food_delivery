@@ -29,7 +29,7 @@ class CartRepo {
 
     sharedPreferences.setStringList(AppConstant.CART_LIST, cart);
     //print(sharedPreferences.getStringList(AppConstant.CART_LIST));
-    // /getCartList();
+    // getCartList();
   }
 
   List<CartModel> getCartList(){
@@ -66,7 +66,7 @@ class CartRepo {
     }
 
     for(int i=0; i<cart.length; i++){
-      //print('history list'+cart[i]);
+      print('history list'+cart[i]);
       cartHistory.add(cart[i]);
     }
     removeCart();
