@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
+import 'package:food_delivery/models/cart_model.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/app_constants.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -15,7 +19,7 @@ class CartHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var getCartHistoryList = Get.find<CartController>().getCartHistoryList();
+    var getCartHistoryList = Get.find<CartController>().getCartHistoryList().reversed.toList();
 
       Map<String, int> cartItemsPerOrder = Map();
       
@@ -28,11 +32,15 @@ class CartHistory extends StatelessWidget {
         }
       }
       
-      List<int> cartOrderTimeToList(){
+      List<int> cartItemPerOrderToList(){
         return cartItemsPerOrder.entries.map((e) => e.value).toList();
       }
+
+      List<String> cartOrderTimeToList(){
+        return cartItemsPerOrder.entries.map((e) => e.key).toList();
+      }
       
-      List<int> itemsPerOrder = cartOrderTimeToList();
+      List<int> itemsPerOrder = cartItemPerOrderToList();
       
       var listCounter = 0;  
   
@@ -69,7 +77,7 @@ class CartHistory extends StatelessWidget {
                   children: [
                     for(int i=0; i<itemsPerOrder.length; i++)
                       Container(
-                        height: 120,
+                        height: Dimensions.height30*4,
                         margin: EdgeInsets.only(bottom: Dimensions.height20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,25 +120,49 @@ class CartHistory extends StatelessWidget {
                                 ),
 
                                 Container(
-                                  height: 80,
+                                  height: Dimensions.height20*4,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       SmallText(text: "Total", color: AppColors.titleColor,),
-                                      BigText(text: itemsPerOrder[i].toString()+" Items", color: AppColors.titleColor,),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: Dimensions.width10,
-                                          vertical: Dimensions.height10/2,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(Dimensions.radius15/3),
-                                          border: Border.all(width: 1, color: AppColors.mainColor),
 
+                                      BigText(text: itemsPerOrder[i].toString()+" Items", color: AppColors.titleColor,),
+
+                                      GestureDetector(
+                                        onTap: () {
+                                          var orderTime = cartOrderTimeToList();
+                                          Map<int, CartModel> moreOrder = {};
+
+                                          for(int j=0; j<getCartHistoryList.length; j++){
+                                            if(getCartHistoryList[j].time == orderTime[i]){
+                                              //print("Order time is: "+orderTime[i]);
+                                              //print("the product id is: "+getCartHistoryList[j].product!.id.toString());
+                                              //print("the products info is: "+jsonEncode(getCartHistoryList[j]));
+                                              moreOrder.putIfAbsent(getCartHistoryList[j].id!, () => 
+                                                CartModel.fromJson(jsonDecode(jsonEncode(getCartHistoryList[j])))
+                                              );
+                                            }
+                                          }
+
+                                          Get.find<CartController>().setItems = moreOrder;
+                                          Get.find<CartController>().addToCartList;
+                                          Get.toNamed(RouteHelper.getCartPage());
+
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: Dimensions.width10,
+                                            vertical: Dimensions.height10/2,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(Dimensions.radius15/3),
+                                            border: Border.all(width: 1, color: AppColors.mainColor),
+                                        
+                                          ),
+                                          child: SmallText(text: "one more", color: AppColors.mainColor,),
                                         ),
-                                        child: SmallText(text: "one more", color: AppColors.mainColor,),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
