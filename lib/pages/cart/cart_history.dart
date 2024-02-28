@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery/base/no_data_page.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/models/cart_model.dart';
 import 'package:food_delivery/routes/route_helper.dart';
@@ -62,7 +63,10 @@ class CartHistory extends StatelessWidget {
             ),
           ),
 
-          Expanded(
+          GetBuilder<CartController>(builder: (_cartController){
+            return _cartController.getCartHistoryList().length > 0 
+            ?
+            Expanded(
             child: Container(
               margin: EdgeInsets.only(
                 top: Dimensions.height20,
@@ -180,6 +184,18 @@ class CartHistory extends StatelessWidget {
               ),
             ),
           )
+          :
+          SizedBox(
+            height: MediaQuery.of(context).size.height/1.5,
+            child: const Center(
+              child: NoDataPage(
+                text: "You didn't buy anythings so far!", 
+                imagPath: "assets/image/empty_box.png",
+              ),
+            ),
+          );
+          
+          })
         ],
       ),
     );
