@@ -25,116 +25,119 @@ class SignUpPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          SizedBox(height: Dimensions.screenHieght*0.05,),
-          
-          //app logo
-          Container(
-            height:  Dimensions.screenHieght*0.25,
-            child: Center(
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: Dimensions.radius20*4,
-                backgroundImage: const AssetImage(
-                  "assets/image/logo part 1.png"
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(height: Dimensions.screenHieght*0.05,),
+            
+            //app logo
+            Container(
+              height:  Dimensions.screenHieght*0.25,
+              child: Center(
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: Dimensions.radius20*4,
+                  backgroundImage: const AssetImage(
+                    "assets/image/logo part 1.png"
+                  ),
                 ),
               ),
             ),
-          ),
-
-          //your email
-          AppTextField(
-            textController: emailController, 
-            hintText: "Email", 
-            icon: Icons.email,
-          ),
-
-          SizedBox(height: Dimensions.height20,),
-
-          //your password
-          AppTextField(
-            textController: passwordController, 
-            hintText: "Password", 
-            icon: Icons.password_sharp,
-          ),
-
-          SizedBox(height: Dimensions.height20,),
-
-          //your name
-          AppTextField(
-            textController: nameController, 
-            hintText: "Name", 
-            icon: Icons.person,
-          ),
-
-          SizedBox(height: Dimensions.height20,),
-
-          //your phone
-          AppTextField(
-            textController: phoneController, 
-            hintText: "Phone", 
-            icon: Icons.phone,
-          ),
-
-          SizedBox(height: Dimensions.height20*2,),
-
-          Container(
-            width: Dimensions.screenWidth/2,
-            height: Dimensions.screenHieght/15,
-
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius30),
-              color: AppColors.mainColor
+        
+            //your email
+            AppTextField(
+              textController: emailController, 
+              hintText: "Email", 
+              icon: Icons.email,
             ),
-            child: Center(
-              child: BigText(
-                text: "Signup",
-                size: Dimensions.font20+Dimensions.font20/2,
-                color: Colors.white,
+        
+            SizedBox(height: Dimensions.height20,),
+        
+            //your password
+            AppTextField(
+              textController: passwordController, 
+              hintText: "Password", 
+              icon: Icons.password_sharp,
+            ),
+        
+            SizedBox(height: Dimensions.height20,),
+        
+            //your name
+            AppTextField(
+              textController: nameController, 
+              hintText: "Name", 
+              icon: Icons.person,
+            ),
+        
+            SizedBox(height: Dimensions.height20,),
+        
+            //your phone
+            AppTextField(
+              textController: phoneController, 
+              hintText: "Phone", 
+              icon: Icons.phone,
+            ),
+        
+            SizedBox(height: Dimensions.height20*2,),
+        
+            Container(
+              width: Dimensions.screenWidth/2,
+              height: Dimensions.screenHieght/15,
+        
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius30),
+                color: AppColors.mainColor
               ),
-            ),
-          ),
-
-          SizedBox(height: Dimensions.height10,),
-
-          RichText(
-            text: TextSpan(
-              recognizer:  TapGestureRecognizer()..onTap=()=>Get.back(),
-              text: "have an account already?",
-              style: TextStyle(
-                color: Colors.grey[500],
-                fontSize: Dimensions.font20,
-              )
-            )
-          ),
-
-          SizedBox(height: Dimensions.screenHieght*0.05,),
-
-          RichText(
-            text: TextSpan(
-              text: "Sign up using one of the following method",
-              style: TextStyle(
-                color: Colors.grey[500],
-                fontSize: Dimensions.font16,
-              )
-            )
-          ),
-
-          Wrap(
-            children: List.generate(3, (index) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                radius: Dimensions.radius30,
-                backgroundImage: AssetImage(
-                  "assets/image/${signUpImages[index]}"
+              child: Center(
+                child: BigText(
+                  text: "Signup",
+                  size: Dimensions.font20+Dimensions.font20/2,
+                  color: Colors.white,
                 ),
               ),
-            )),
-          )
-
-          
-        ],
+            ),
+        
+            SizedBox(height: Dimensions.height10,),
+        
+            RichText(
+              text: TextSpan(
+                recognizer:  TapGestureRecognizer()..onTap=()=>Get.back(),
+                text: "have an account already?",
+                style: TextStyle(
+                  color: Colors.grey[500],
+                  fontSize: Dimensions.font20,
+                )
+              )
+            ),
+        
+            SizedBox(height: Dimensions.screenHieght*0.05,),
+        
+            RichText(
+              text: TextSpan(
+                text: "Sign up using one of the following method",
+                style: TextStyle(
+                  color: Colors.grey[500],
+                  fontSize: Dimensions.font16,
+                )
+              )
+            ),
+        
+            Wrap(
+              children: List.generate(3, (index) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  radius: Dimensions.radius30,
+                  backgroundImage: AssetImage(
+                    "assets/image/${signUpImages[index]}"
+                  ),
+                ),
+              )),
+            )
+        
+            
+          ],
+        ),
       ),
     );
   }
