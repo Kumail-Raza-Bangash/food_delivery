@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/pages/auth/sign_in_page.dart';
 import 'package:food_delivery/pages/auth/sign_up_page.dart';
 import 'package:food_delivery/pages/splash/splash_page.dart';
 import 'package:food_delivery/routes/route_helper.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         return GetBuilder<RecommendedProductController>(builder: (_){
           return const GetMaterialApp(
             title: 'Food Delivery',
-            home: SignUpPage(),
+            home: SignInPage(),
 
             //home: SplashScreen(),
             //initialRoute: RouteHelper.getSplashPage(),
