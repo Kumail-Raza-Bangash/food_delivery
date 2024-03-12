@@ -27,6 +27,7 @@ class AccountPage extends StatelessWidget {
 
         child: Column(
           children: [
+            //profile icons
             AppIcon(
               icon: Icons.person,
               backgroundColor: AppColors.mainColor,
@@ -34,18 +35,101 @@ class AccountPage extends StatelessWidget {
               iconSize: Dimensions.height15*5,
               size: Dimensions.height15*10,
             ),
-            AccountWidget(
-              appIcon: AppIcon(
-                icon: Icons.person,
-                backgroundColor: AppColors.mainColor,
-                iconColor: Colors.white,
-                iconSize: Dimensions.height10*5/2,
-                size: Dimensions.height10*5,
-              ), 
-              bigText: BigText(
-                text: "Ahmad"
+            SizedBox(height: Dimensions.height30,),
+
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    //name
+                AccountWidget(
+                  appIcon: AppIcon(
+                    icon: Icons.person,
+                    backgroundColor: AppColors.mainColor,
+                    iconColor: Colors.white,
+                    iconSize: Dimensions.height10*5/2,
+                    size: Dimensions.height10*5,
+                  ), 
+                  bigText: BigText(
+                    text: "Ahmad"
+                  ),
+                ),
+                SizedBox(height: Dimensions.height20,),
+                //phone
+                AccountWidget(
+                  appIcon: AppIcon(
+                    icon: Icons.phone,
+                    backgroundColor: AppColors.yellowColor,
+                    iconColor: Colors.white,
+                    iconSize: Dimensions.height10*5/2,
+                    size: Dimensions.height10*5,
+                  ), 
+                  bigText: BigText(
+                    text: "123456789"
+                  ),
+                ),
+                SizedBox(height: Dimensions.height20,),
+                //email
+                AccountWidget(
+                  appIcon: AppIcon(
+                    icon: Icons.email,
+                    backgroundColor: AppColors.yellowColor,
+                    iconColor: Colors.white,
+                    iconSize: Dimensions.height10*5/2,
+                    size: Dimensions.height10*5,
+                  ), 
+                  bigText: BigText(
+                    text: "Ahmad@email.com"
+                  ),
+                ),
+                SizedBox(height: Dimensions.height20,),
+                //address
+                AccountWidget(
+                  appIcon: AppIcon(
+                    icon: Icons.location_on,
+                    backgroundColor: AppColors.yellowColor,
+                    iconColor: Colors.white,
+                    iconSize: Dimensions.height10*5/2,
+                    size: Dimensions.height10*5,
+                  ), 
+                  bigText: BigText(
+                    text: "Filled in your address"
+                  ),
+                ),
+                SizedBox(height: Dimensions.height20,),
+                //meassage
+                AccountWidget(
+                  appIcon: AppIcon(
+                    icon: Icons.message_outlined,
+                    backgroundColor: Colors.redAccent,
+                    iconColor: Colors.white,
+                    iconSize: Dimensions.height10*5/2,
+                    size: Dimensions.height10*5,
+                  ), 
+                  bigText: BigText(
+                    text: "Message"
+                  ),
+                ),
+                SizedBox(height: Dimensions.height20,),
+
+                AccountWidget(
+                  appIcon: AppIcon(
+                    icon: Icons.message_outlined,
+                    backgroundColor: Colors.redAccent,
+                    iconColor: Colors.white,
+                    iconSize: Dimensions.height10*5/2,
+                    size: Dimensions.height10*5,
+                  ), 
+                  bigText: BigText(
+                    text: "Message"
+                  ),
+                ),
+                SizedBox(height: Dimensions.height20,),
+                          
+                  ],
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
