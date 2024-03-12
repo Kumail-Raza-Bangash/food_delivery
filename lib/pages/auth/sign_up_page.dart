@@ -1,6 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_text_field.dart';
+import 'package:food_delivery/widgets/big_text.dart';
+import 'package:get/get.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -12,6 +16,12 @@ class SignUpPage extends StatelessWidget {
     var passwordController = TextEditingController();
     var nameController = TextEditingController();
     var phoneController = TextEditingController();
+
+    var signUpImages = [
+      "t.png",
+      "f.png",
+      "g.png"
+    ];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -67,7 +77,61 @@ class SignUpPage extends StatelessWidget {
             icon: Icons.phone,
           ),
 
-          SizedBox(height: Dimensions.height20,),
+          SizedBox(height: Dimensions.height20*2,),
+
+          Container(
+            width: Dimensions.screenWidth/2,
+            height: Dimensions.screenHieght/15,
+
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimensions.radius30),
+              color: AppColors.mainColor
+            ),
+            child: Center(
+              child: BigText(
+                text: "Signup",
+                size: Dimensions.font20+Dimensions.font20/2,
+                color: Colors.white,
+              ),
+            ),
+          ),
+
+          SizedBox(height: Dimensions.height10,),
+
+          RichText(
+            text: TextSpan(
+              recognizer:  TapGestureRecognizer()..onTap=()=>Get.back(),
+              text: "have an account already?",
+              style: TextStyle(
+                color: Colors.grey[500],
+                fontSize: Dimensions.font20,
+              )
+            )
+          ),
+
+          SizedBox(height: Dimensions.screenHieght*0.05,),
+
+          RichText(
+            text: TextSpan(
+              text: "Sign up using one of the following method",
+              style: TextStyle(
+                color: Colors.grey[500],
+                fontSize: Dimensions.font16,
+              )
+            )
+          ),
+
+          Wrap(
+            children: List.generate(3, (index) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                radius: Dimensions.radius30,
+                backgroundImage: AssetImage(
+                  "assets/image/${signUpImages[index]}"
+                ),
+              ),
+            )),
+          )
 
           
         ],
