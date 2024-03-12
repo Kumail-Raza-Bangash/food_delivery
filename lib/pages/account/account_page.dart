@@ -42,7 +42,7 @@ class AccountPage extends StatelessWidget {
                 child: Column(
                   children: [
                     //name
-                AccountWidget(
+                    AccountWidget(
                   appIcon: AppIcon(
                     icon: Icons.person,
                     backgroundColor: AppColors.mainColor,
@@ -54,9 +54,9 @@ class AccountPage extends StatelessWidget {
                     text: "Ahmad"
                   ),
                 ),
-                SizedBox(height: Dimensions.height20,),
-                //phone
-                AccountWidget(
+                    SizedBox(height: Dimensions.height20,),
+                    //phone
+                    AccountWidget(
                   appIcon: AppIcon(
                     icon: Icons.phone,
                     backgroundColor: AppColors.yellowColor,
@@ -68,9 +68,9 @@ class AccountPage extends StatelessWidget {
                     text: "123456789"
                   ),
                 ),
-                SizedBox(height: Dimensions.height20,),
-                //email
-                AccountWidget(
+                    SizedBox(height: Dimensions.height20,),
+                    //email
+                    AccountWidget(
                   appIcon: AppIcon(
                     icon: Icons.email,
                     backgroundColor: AppColors.yellowColor,
@@ -82,9 +82,9 @@ class AccountPage extends StatelessWidget {
                     text: "Ahmad@email.com"
                   ),
                 ),
-                SizedBox(height: Dimensions.height20,),
-                //address
-                AccountWidget(
+                    SizedBox(height: Dimensions.height20,),
+                    //address
+                    AccountWidget(
                   appIcon: AppIcon(
                     icon: Icons.location_on,
                     backgroundColor: AppColors.yellowColor,
@@ -96,9 +96,9 @@ class AccountPage extends StatelessWidget {
                     text: "Filled in your address"
                   ),
                 ),
-                SizedBox(height: Dimensions.height20,),
-                //meassage
-                AccountWidget(
+                    SizedBox(height: Dimensions.height20,),
+                    //meassage
+                    AccountWidget(
                   appIcon: AppIcon(
                     icon: Icons.message_outlined,
                     backgroundColor: Colors.redAccent,
@@ -110,9 +110,9 @@ class AccountPage extends StatelessWidget {
                     text: "Message"
                   ),
                 ),
-                SizedBox(height: Dimensions.height20,),
+                    SizedBox(height: Dimensions.height20,),
 
-                AccountWidget(
+                    AccountWidget(
                   appIcon: AppIcon(
                     icon: Icons.message_outlined,
                     backgroundColor: Colors.redAccent,
@@ -124,7 +124,7 @@ class AccountPage extends StatelessWidget {
                     text: "Message"
                   ),
                 ),
-                SizedBox(height: Dimensions.height20,),
+                    SizedBox(height: Dimensions.height20,),
                           
                   ],
                 ),
