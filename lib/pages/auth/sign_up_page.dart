@@ -191,7 +191,7 @@ class SignUpPage extends StatelessWidget {
           ),
         ) 
         :
-        CustomLoader();
+        const CustomLoader();
       }),
     );
 

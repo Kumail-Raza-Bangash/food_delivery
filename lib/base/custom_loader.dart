@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/controllers/auth_controller.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
-import 'package:get/get.dart';
 
 class CustomLoader extends StatelessWidget {
   const CustomLoader({super.key});
@@ -11,7 +9,7 @@ class CustomLoader extends StatelessWidget {
   Widget build(BuildContext context) {
 
     // ignore: prefer_interpolation_to_compose_strings
-    print("I am printing loading state" + Get.find<AuthController>().isLoaded.toString());
+    //print("I am printing loading state" + Get.find<AuthController>().isLoaded.toString());
 
     return Container(
       height: Dimensions.height20*5,
