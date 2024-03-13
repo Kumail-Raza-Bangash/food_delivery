@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/base/show_custom_snackbar.dart';
+import 'package:food_delivery/controllers/auth_controller.dart';
 import 'package:food_delivery/models/signup_body_model.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -26,6 +27,9 @@ class SignUpPage extends StatelessWidget {
     ];
 
     void _registration() {
+
+      var authController = Get.find<AuthController>();
+      
       String name = nameController.text.trim(); 
       String email = emailController.text.trim(); 
       String phone = phoneController.text.trim(); 
@@ -52,6 +56,14 @@ class SignUpPage extends StatelessWidget {
           password: password,
           );
           print(signUpBody.toString());
+
+          authController.registration(signUpBody).then((status) {
+            if(status.isSuccess){
+              print("success");
+            }else{
+              showCustomSnackBar(status.message);
+            }
+          });
       }
     }
 
