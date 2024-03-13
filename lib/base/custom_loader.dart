@@ -11,17 +11,19 @@ class CustomLoader extends StatelessWidget {
     // ignore: prefer_interpolation_to_compose_strings
     //print("I am printing loading state" + Get.find<AuthController>().isLoaded.toString());
 
-    return Container(
-      height: Dimensions.height20*5,
-      width: Dimensions.width20*5,
-      alignment: Alignment.center,
-
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Dimensions.radius20*5/2),
-        color: AppColors.mainColor,
+    return Center(
+      child: Container(
+        height: Dimensions.height20*5,
+        width: Dimensions.width20*5,
+        alignment: Alignment.center,
+      
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(Dimensions.radius20*5/2),
+          color: AppColors.mainColor,
+        ),
+      
+        child: const CircularProgressIndicator(color: Colors.white,),
       ),
-
-      child: const CircularProgressIndicator(color: Colors.white,),
     );
   }
 }
