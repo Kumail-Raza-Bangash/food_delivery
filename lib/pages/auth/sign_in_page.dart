@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/base/show_custom_snackbar.dart';
+import 'package:food_delivery/controllers/auth_controller.dart';
 import 'package:food_delivery/pages/auth/sign_up_page.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -15,6 +17,35 @@ class SignInPage extends StatelessWidget {
 
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
+
+    void _login(AuthController authController) {
+
+      var authController = Get.find<AuthController>();
+      
+      String email = emailController.text.trim(); 
+      String password= passwordController.text.trim(); 
+
+      if (email.isEmpty){
+        showCustomSnackBar("Type in your email", title: "Email Address");
+      }else if(!GetUtils.isEmail(email)){
+        showCustomSnackBar("Type in a valid email address", title: "Valid Email Address");
+      }else if(password.isEmpty){
+        showCustomSnackBar("Type in your password", title: "Password");
+      }else if(password.length < 6){
+        showCustomSnackBar("Password could not be less than 6 characters", title: "Password");
+      }else {
+        showCustomSnackBar("Login Successfully", title: "Login");
+        
+          authController.login(email, password).then((status) {
+            if(status.isSuccess){
+              print("Login success ");
+            }else{
+              showCustomSnackBar(status.message);
+            }
+          });
+      }
+    }
+
 
 
     return Scaffold(
