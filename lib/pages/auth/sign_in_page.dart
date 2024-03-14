@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/base/custom_loader.dart';
 import 'package:food_delivery/base/show_custom_snackbar.dart';
 import 'package:food_delivery/controllers/auth_controller.dart';
 import 'package:food_delivery/pages/auth/sign_up_page.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_text_field.dart';
@@ -38,7 +40,7 @@ class SignInPage extends StatelessWidget {
         
           authController.login(email, password).then((status) {
             if(status.isSuccess){
-              print("Login success ");
+              Get.toNamed(RouteHelper.getInitial());
             }else{
               showCustomSnackBar(status.message);
             }
@@ -50,7 +52,8 @@ class SignInPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: GetBuilder<AuthController>(builder: (authController){
+        return !authController.isLoaded ? SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -135,19 +138,24 @@ class SignInPage extends StatelessWidget {
         
             SizedBox(height: Dimensions.screenHieght*0.05,),
         
-            Container(
-              width: Dimensions.screenWidth/2,
-              height: Dimensions.screenHieght/15,
-        
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
-                color: AppColors.mainColor
-              ),
-              child: Center(
-                child: BigText(
-                  text: "Sign in",
-                  size: Dimensions.font20+Dimensions.font20/2,
-                  color: Colors.white,
+            GestureDetector(
+              onTap: (){
+                _login(authController);
+              },
+              child: Container(
+                width: Dimensions.screenWidth/2,
+                height: Dimensions.screenHieght/15,
+                      
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius30),
+                  color: AppColors.mainColor
+                ),
+                child: Center(
+                  child: BigText(
+                    text: "Sign in",
+                    size: Dimensions.font20+Dimensions.font20/2,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -179,7 +187,10 @@ class SignInPage extends StatelessWidget {
             
           ],
         ),
-      ),
+      )
+      :
+      const CustomLoader();
+      }),
     );
   }
 }
