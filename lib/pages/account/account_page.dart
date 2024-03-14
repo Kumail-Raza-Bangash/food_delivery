@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/base/custom_loader.dart';
 import 'package:food_delivery/controllers/auth_controller.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
+import 'package:food_delivery/controllers/user_controller.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -14,6 +16,14 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
+    if(_userLoggedIn){
+      Get.find<UserController>().getUserInfo();
+      print("User has logged in");
+
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainColor,
@@ -24,7 +34,8 @@ class AccountPage extends StatelessWidget {
         ),
       ),
 
-      body: Container(
+      body: GetBuilder<UserController>(builder: (userController){
+        return _userLoggedIn ? (userController.isLoading ? Container(
 
         width: double.maxFinite,
         margin: EdgeInsets.only(top: Dimensions.height20),
@@ -150,7 +161,14 @@ class AccountPage extends StatelessWidget {
             )
           ],
         ),
-      ),
+      )
+      :
+      const CustomLoader()
+      ) 
+      :
+      const Center(child: Text("You must Loggin"),);
+
+      }),
     );
   }
 }

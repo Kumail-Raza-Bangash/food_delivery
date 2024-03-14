@@ -9,9 +9,10 @@ class AppConstant {
   static const String RECOMMENDED_PRODUCTS_URI = "/api/v1/products/recommended";
   //static const String DRINKS_URI = "/api/v1/products/drinks";
 
-  //auth end point 
+  //user and auth end point 
   static const String REGISTRATION_URI = "/api/v1/auth/register";
   static const String LOGIN_URI = "/api/v1/auth/login";
+  static const String USER_INFO_URI = "/api/v1/customer/info";
 
   static const String UPLOAD_URL = "/uploads/";
 
