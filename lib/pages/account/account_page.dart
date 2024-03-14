@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery/base/custom_loader.dart';
 import 'package:food_delivery/controllers/auth_controller.dart';
@@ -20,7 +22,7 @@ class AccountPage extends StatelessWidget {
     bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
     if(_userLoggedIn){
       Get.find<UserController>().getUserInfo();
-      print("User has logged in");
+      //print("User has logged in");
 
     }
 
