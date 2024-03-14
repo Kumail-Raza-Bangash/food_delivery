@@ -66,7 +66,7 @@ class AccountPage extends StatelessWidget {
                     size: Dimensions.height10*5,
                   ), 
                   bigText: BigText(
-                    text: "Ahmad"
+                    text: userController.userModel.name,
                   ),
                 ),
                     SizedBox(height: Dimensions.height20,),
@@ -80,7 +80,7 @@ class AccountPage extends StatelessWidget {
                     size: Dimensions.height10*5,
                   ), 
                   bigText: BigText(
-                    text: "123456789"
+                    text: userController.userModel.phone,
                   ),
                 ),
                     SizedBox(height: Dimensions.height20,),
@@ -94,7 +94,7 @@ class AccountPage extends StatelessWidget {
                     size: Dimensions.height10*5,
                   ), 
                   bigText: BigText(
-                    text: "Ahmad@email.com"
+                    text: userController.userModel.email,
                   ),
                 ),
                     SizedBox(height: Dimensions.height20,),
