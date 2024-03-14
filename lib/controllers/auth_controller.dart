@@ -60,5 +60,10 @@ class AuthController extends GetxController implements GetxService {
     return responseModel;
   }
 
+  bool userLoggedIn() {
+    return authRepo.userLoggedIn();
+  }
+
+
 
 }
