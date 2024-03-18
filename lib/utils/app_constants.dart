@@ -16,6 +16,9 @@ class AppConstant {
 
   static const String UPLOAD_URL = "/uploads/";
 
+  static const String USER_ADDRESS = "user-address";
+  static const String GEOCODE_URI = "/api/v1/config/geocode-api";
+
   static const String TOKEN = "";
   static const String PHONE = "";
   static const String PASSWORD = "";
