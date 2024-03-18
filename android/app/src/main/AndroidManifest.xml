@@ -49,6 +49,7 @@
         
         <meta-data android:name="flutterEmbedding" android:value="2" /> 
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="YOUR KEY HERE"/> <!-- this is for the google map setting for android -->
-        
+        <!--<meta-data android:name="com.morticia.android.food_delivery" android:value="AIzaSyBf3tEmdR18S-2v0E1i1x0oqcXJ9imntT4" />     this is unknown api key--> 
+
     </application>
 </manifest>
