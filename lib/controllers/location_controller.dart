@@ -175,6 +175,10 @@ class LocationController extends GetxController implements GetxService {
     update();
   }
 
+  String getUserAddressFromLocalStorage(){
+    return locationRepo.getUserAddress();
+  }
+
 
 
 }
