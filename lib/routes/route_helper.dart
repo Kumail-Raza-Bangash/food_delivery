@@ -27,7 +27,7 @@ class RouteHelper {
 
   static List<GetPage> routes = [
 
-    GetPage(name: initial, page: () => const HomePage()),
+    GetPage(name: initial, page: () => const HomePage(), transition: Transition.fade),
 
     GetPage(name: signIn, page: () => const SignInPage(), transition: Transition.fade),
 

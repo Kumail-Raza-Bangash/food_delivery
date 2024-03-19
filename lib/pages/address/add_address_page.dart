@@ -3,6 +3,7 @@ import 'package:food_delivery/controllers/auth_controller.dart';
 import 'package:food_delivery/controllers/location_controller.dart';
 import 'package:food_delivery/controllers/user_controller.dart';
 import 'package:food_delivery/models/address_model.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
@@ -39,6 +40,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
       Get.find<UserController>().getUserInfo();
     }
     if (Get.find<LocationController>().addressList.isNotEmpty) {
+      Get.find<LocationController>().getUserAddress();
       _cameraPosition = CameraPosition(
         target: LatLng(
           double.parse(Get.find<LocationController>().getAddress['latitude']),
@@ -244,7 +246,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                           .addAddress(addressModel)
                           .then((response) {
                         if (response.isSuccess) {
-                          Get.back();
+                          Get.toNamed(RouteHelper.getInitial());
                           Get.snackbar("Address", "Added Successfully");
                         } else {
                           Get.snackbar("Address", "Couldn't save address");
