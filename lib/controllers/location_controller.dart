@@ -88,6 +88,9 @@ class LocationController extends GetxController implements GetxService {
       } catch (e) {
         print(e.toString());
       }
+
+      _loading = false;
+      update();
     }
   }
 

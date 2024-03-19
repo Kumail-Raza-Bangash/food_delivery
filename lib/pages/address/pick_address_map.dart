@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_delivery/controllers/location_controller.dart';
+import 'package:food_delivery/utils/dimensions.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -50,7 +51,8 @@ class _PickAddressMapState extends State<PickAddressMap> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<LocationController>(builder: (locationController){
+      return Scaffold(
       body: SafeArea(
         child: Center(
           child: SizedBox(
@@ -70,11 +72,23 @@ class _PickAddressMapState extends State<PickAddressMap> {
                     Get.find<LocationController>().updatePosition(_cameraPosition, false);
                   },
                 ),
+
+                Center(
+                  child: !locationController.loading?Image.asset(
+                    "assets/image/pick_marker.png",
+                    height: Dimensions.height10*5,
+                    width: Dimensions.width10*5,
+                  )
+                  :
+                  const CircularProgressIndicator(),
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  
+    });
   }
 }
