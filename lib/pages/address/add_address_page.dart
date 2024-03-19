@@ -4,6 +4,7 @@ import 'package:food_delivery/controllers/location_controller.dart';
 import 'package:food_delivery/controllers/user_controller.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
+import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/app_text_field.dart';
 import 'package:food_delivery/widgets/big_text.dart';
 import 'package:get/get.dart';
@@ -190,6 +191,49 @@ class _AddAddressPageState extends State<AddAddressPage> {
           );
         });
       }),
+
+      bottomNavigationBar: GetBuilder<LocationController>(builder: (locationController){
+        return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+
+          Container(
+            height: Dimensions.height20*8,
+            padding: EdgeInsets.only(top: Dimensions.height30, left: Dimensions.width20, right: Dimensions.width20,),
+            decoration: BoxDecoration(
+              color: AppColors.buttonBackgroundColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimensions.radius20*2),
+                topRight: Radius.circular(Dimensions.radius20*2),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                
+                GestureDetector(
+                  onTap: () {
+                    //controller.addItem(product);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, right: Dimensions.width20, left: Dimensions.width20),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainColor,
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    ),
+                    child: BigText(text: "Save address", color: Colors.white, size: Dimensions.font26,),
+                  ),
+                ),
+          
+          ],
+        ),
+      ),
+
+        ],
+      );
+      }
+      ),
+      
     );
   }
 }
