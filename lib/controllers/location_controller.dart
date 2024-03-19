@@ -33,6 +33,8 @@ class LocationController extends GetxController implements GetxService {
   Position get pickPosition => _pickPosition;
   Placemark get placemark => _placemark;
   Placemark get pickPlacemark => _pickPlacemark;
+  List<String> get addressTypeList => _addressTypeList;
+  int get addressTypeIndex => _addressTypeIndex;
 
   late GoogleMapController _mapController;
   void setMapController(GoogleMapController mapController) {
@@ -110,5 +112,12 @@ class LocationController extends GetxController implements GetxService {
 
     return _addressModel;
   }
+
+  void setAddressTypeIndex(int index){
+    _addressTypeIndex = index;
+    update();
+  }
+
+
 
 }

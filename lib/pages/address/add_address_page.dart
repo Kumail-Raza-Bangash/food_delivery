@@ -110,6 +110,43 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   ],
                 ),
               ),
+              SizedBox(
+                height: 50,
+                child: ListView.builder(
+                  itemCount: locationController.addressTypeList.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: (){
+                        locationController.setAddressTypeIndex(index);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(Dimensions.radius20/4),
+                          color: Theme.of(context).cardColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey[200]!,
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                            )
+                          ]
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              index == 0 ? Icons.home_filled : 
+                              index == 1 ? Icons.work : Icons.location_on,
+
+                              color: locationController.addressTypeIndex == index ? 
+                              AppColors.mainColor: Theme.of(context).disabledColor,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+                ),
+              ),
               SizedBox(height: Dimensions.height20),
               Padding(
                 padding: EdgeInsets.only(left: Dimensions.width20),
