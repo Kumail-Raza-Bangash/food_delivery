@@ -109,44 +109,48 @@ class AccountPage extends StatelessWidget {
                                   height: Dimensions.height20,
                                 ),
                                 //address
-                                GetBuilder<LocationController>(builder: (locationController){
-                                  if(_userLoggedIn && locationController.addressList.isEmpty){
-                                  return GestureDetector(
-                                    onTap: (){
-                                      Get.offNamed(RouteHelper.getAddressPage());
-                                    },
-                                    child: AccountWidget(
-                                      appIcon: AppIcon(
-                                        icon: Icons.location_on,
-                                        backgroundColor: AppColors.yellowColor,
-                                        iconColor: Colors.white,
-                                        iconSize: Dimensions.height10 * 5 / 2,
-                                        size: Dimensions.height10 * 5,
+                                GetBuilder<LocationController>(
+                                    builder: (locationController) {
+                                  if (_userLoggedIn &&
+                                      locationController.addressList.isEmpty) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.offNamed(
+                                            RouteHelper.getAddressPage());
+                                      },
+                                      child: AccountWidget(
+                                        appIcon: AppIcon(
+                                          icon: Icons.location_on,
+                                          backgroundColor:
+                                              AppColors.yellowColor,
+                                          iconColor: Colors.white,
+                                          iconSize: Dimensions.height10 * 5 / 2,
+                                          size: Dimensions.height10 * 5,
+                                        ),
+                                        bigText: BigText(
+                                            text: "Filled in your address"),
                                       ),
-                                      bigText:
-                                          BigText(text: "Filled in your address"),
-                                    ),
-                                  );
-                                }
-                                else{
-                                  return GestureDetector(
-                                    onTap: (){
-                                      Get.offNamed(RouteHelper.getAddressPage());
-                                    },
-                                    child: AccountWidget(
-                                      appIcon: AppIcon(
-                                        icon: Icons.location_on,
-                                        backgroundColor: AppColors.yellowColor,
-                                        iconColor: Colors.white,
-                                        iconSize: Dimensions.height10 * 5 / 2,
-                                        size: Dimensions.height10 * 5,
+                                    );
+                                  } else {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.offNamed(
+                                            RouteHelper.getAddressPage());
+                                      },
+                                      child: AccountWidget(
+                                        appIcon: AppIcon(
+                                          icon: Icons.location_on,
+                                          backgroundColor:
+                                              AppColors.yellowColor,
+                                          iconColor: Colors.white,
+                                          iconSize: Dimensions.height10 * 5 / 2,
+                                          size: Dimensions.height10 * 5,
+                                        ),
+                                        bigText: BigText(text: "Your address"),
                                       ),
-                                      bigText:
-                                          BigText(text: "Your address"),
-                                    ),
-                                  );
-
-                                }}),
+                                    );
+                                  }
+                                }),
                                 SizedBox(
                                   height: Dimensions.height20,
                                 ),

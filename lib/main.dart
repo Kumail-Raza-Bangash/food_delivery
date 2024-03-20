@@ -20,12 +20,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     Get.find<CartController>().getCartData();
 
-    return  GetBuilder<CartController>(builder: (_){
-      return GetBuilder<PopularProductController>(builder: (_){
-        return GetBuilder<RecommendedProductController>(builder: (_){
+    return GetBuilder<CartController>(builder: (_) {
+      return GetBuilder<PopularProductController>(builder: (_) {
+        return GetBuilder<RecommendedProductController>(builder: (_) {
           return GetMaterialApp(
             theme: ThemeData(
               primaryColor: AppColors.mainColor,

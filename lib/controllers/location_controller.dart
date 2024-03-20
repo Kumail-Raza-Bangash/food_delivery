@@ -40,7 +40,6 @@ class LocationController extends GetxController implements GetxService {
   GoogleMapController get mapController => _mapController;
   List<AddressModel> get allAddressList => _allAddressList;
 
-  
   void setMapController(GoogleMapController mapController) {
     _mapController = mapController;
   }
@@ -91,6 +90,8 @@ class LocationController extends GetxController implements GetxService {
 
       _loading = false;
       update();
+    } else {
+      _updateAddressData = true;
     }
   }
 
@@ -107,38 +108,37 @@ class LocationController extends GetxController implements GetxService {
     return _address;
   }
 
-  AddressModel getUserAddress(){
+  AddressModel getUserAddress() {
     late AddressModel _addressModel;
     _getAddress = jsonDecode(locationRepo.getUserAddress());
 
-    try{
-      _addressModel = AddressModel.fromJson(jsonDecode(locationRepo.getUserAddress()));
-    }
-    catch(e){
+    try {
+      _addressModel =
+          AddressModel.fromJson(jsonDecode(locationRepo.getUserAddress()));
+    } catch (e) {
       print(e.toString());
     }
 
     return _addressModel;
   }
 
-  void setAddressTypeIndex(int index){
+  void setAddressTypeIndex(int index) {
     _addressTypeIndex = index;
     update();
   }
 
-  Future<ResponseModel> addAddress(AddressModel addressModel) async{
+  Future<ResponseModel> addAddress(AddressModel addressModel) async {
     _loading = true;
     update();
     Response response = await locationRepo.addAddress(addressModel);
 
     ResponseModel responseModel;
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       await getAddressList();
       String message = response.body('message');
       responseModel = ResponseModel(true, message);
       await saveUserAddress(addressModel);
-    }
-    else {
+    } else {
       print("could not save the address");
       responseModel = ResponseModel(false, response.statusText!);
     }
@@ -147,19 +147,18 @@ class LocationController extends GetxController implements GetxService {
     return responseModel;
   }
 
-  Future<void> getAddressList() async{
+  Future<void> getAddressList() async {
     Response response = await locationRepo.getAllAddress();
 
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       _addressList = [];
       _allAddressList = [];
 
-      response.body.forEach((address){
+      response.body.forEach((address) {
         _addressList.add(AddressModel.fromJson(address));
         _allAddressList.add(AddressModel.fromJson(address));
       });
-    }
-    else{
+    } else {
       _addressList = [];
       _allAddressList = [];
     }
@@ -169,16 +168,15 @@ class LocationController extends GetxController implements GetxService {
   Future<bool> saveUserAddress(AddressModel addressModel) async {
     String userAddress = jsonEncode(addressModel.toJson());
     return await locationRepo.saveUserAddress(userAddress);
-
   }
 
-  void clearAddressList(){
+  void clearAddressList() {
     _addressList = [];
     _allAddressList = [];
     update();
   }
 
-  String getUserAddressFromLocalStorage(){
+  String getUserAddressFromLocalStorage() {
     return locationRepo.getUserAddress();
   }
 
@@ -188,7 +186,4 @@ class LocationController extends GetxController implements GetxService {
     _updateAddressData = false;
     update();
   }
-
-
-
 }

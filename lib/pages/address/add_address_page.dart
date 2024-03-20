@@ -41,7 +41,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
       Get.find<UserController>().getUserInfo();
     }
     if (Get.find<LocationController>().addressList.isNotEmpty) {
-      if(Get.find<LocationController>().getUserAddressFromLocalStorage() == ""){
+      if (Get.find<LocationController>().getUserAddressFromLocalStorage() ==
+          "") {
         Get.find<LocationController>().saveUserAddress(
           Get.find<LocationController>().addressList.last,
         );
@@ -110,15 +111,15 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   child: Stack(
                     children: [
                       GoogleMap(
-                        onTap: (latlng){
-                          Get.toNamed(RouteHelper.getPickAddressPage(),
-                          arguments: PickAddressMap(
-                            fromSignup: false,
-                            fromAddress: true,
-                            googleMapController: locationController.mapController,
-                          )
-                          );
-                        },
+                          onTap: (latlng) {
+                            Get.toNamed(RouteHelper.getPickAddressPage(),
+                                arguments: PickAddressMap(
+                                  fromSignup: false,
+                                  fromAddress: true,
+                                  googleMapController:
+                                      locationController.mapController,
+                                ));
+                          },
                           initialCameraPosition: CameraPosition(
                               target: _initialPosition, zoom: 17),
                           zoomControlsEnabled: false,

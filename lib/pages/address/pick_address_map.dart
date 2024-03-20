@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_delivery/base/custom_button.dart';
 import 'package:food_delivery/controllers/location_controller.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:get/get.dart';
@@ -143,7 +144,7 @@ class _PickAddressMapState extends State<PickAddressMap> {
                                     ))));
                                     locationController.setAddAddressData();
                                   }
-                                  Get.back();
+                                  Get.toNamed(RouteHelper.getAddressPage());
                                 }
                               }
                             },
