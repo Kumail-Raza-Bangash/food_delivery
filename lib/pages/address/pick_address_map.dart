@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/base/custom_button.dart';
 import 'package:food_delivery/controllers/location_controller.dart';
+import 'package:food_delivery/pages/address/widgets/search_location_dialogue_page.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -75,6 +76,13 @@ class _PickAddressMapState extends State<PickAddressMap> {
                       Get.find<LocationController>()
                           .updatePosition(_cameraPosition, false);
                     },
+                    onMapCreated: (GoogleMapController mapController){
+                      _mapController = mapController;
+                      if(!widget.fromAddress){
+                        print("print from website");
+                        //Get.find<LocationController>().getCurrent();
+                      }
+                    },
                   ),
                   Center(
                     child: !locationController.loading
@@ -89,33 +97,38 @@ class _PickAddressMapState extends State<PickAddressMap> {
                     top: Dimensions.height45,
                     left: Dimensions.width20,
                     right: Dimensions.width20,
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Dimensions.width10),
-                      height: Dimensions.height10 * 5,
-                      decoration: BoxDecoration(
-                        color: AppColors.mainColor,
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20 / 2),
-                      ),
-                      child: Row(children: [
-                        Icon(
-                          Icons.location_on,
-                          size: Dimensions.iconSize24,
-                          color: AppColors.yellowColor,
+                    child: InkWell(
+                      onTap: () => Get.dialog(LocationDialogue(mapController: _mapController)),
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: Dimensions.width10),
+                        height: Dimensions.height10 * 5,
+                        decoration: BoxDecoration(
+                          color: AppColors.mainColor,
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20 / 2),
                         ),
-                        Expanded(
-                          child: Text(
-                            locationController.pickPlacemark.name ?? '',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Dimensions.font16,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                        child: Row(children: [
+                          Icon(
+                            Icons.location_on,
+                            size: Dimensions.iconSize24,
+                            color: AppColors.yellowColor,
                           ),
-                        ),
-                      ]),
+                          Expanded(
+                            child: Text(
+                              locationController.pickPlacemark.name ?? '',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Dimensions.font16,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          SizedBox(width: Dimensions.width20,),
+                          Icon(Icons.search, size: 25, color: AppColors.yellowColor,),
+                        ]),
+                      ),
                     ),
                   ),
                   Positioned(
