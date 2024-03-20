@@ -27,6 +27,9 @@ class LocationController extends GetxController implements GetxService {
   bool _updateAddressData = true;
   bool _changeAddress = true;
   late GoogleMapController _mapController;
+  bool _isLoading = false;
+  bool _inZone = false;
+  bool _buttonDisabled = true;
 
   List<AddressModel> get addressList => _addressList;
   Map get getAddress => _getAddress;
@@ -39,6 +42,9 @@ class LocationController extends GetxController implements GetxService {
   int get addressTypeIndex => _addressTypeIndex;
   GoogleMapController get mapController => _mapController;
   List<AddressModel> get allAddressList => _allAddressList;
+  bool get isLoading => _isLoading;
+  bool get inZone => _inZone;
+  bool get buttonDisabled => _buttonDisabled;
 
   void setMapController(GoogleMapController mapController) {
     _mapController = mapController;
@@ -77,6 +83,10 @@ class LocationController extends GetxController implements GetxService {
             speedAccuracy: 1,
           );
         }
+
+        ResponseModel _responseModel = await getZone(position.target.latitude.toString(), position.target.longitude.toString(), false);
+        _buttonDisabled =! _responseModel.isSuccess;
+
         if (_changeAddress) {
           String _address = await getAddressfromGeocode(
               LatLng(position.target.latitude, position.target.longitude));
@@ -185,5 +195,32 @@ class LocationController extends GetxController implements GetxService {
     _placemark = _pickPlacemark;
     _updateAddressData = false;
     update();
+  }
+
+  Future<ResponseModel> getZone(String lat, String lng, bool markerLoad) async {
+    late ResponseModel _responseModel;
+    if(markerLoad){
+      _loading = true;
+    }
+    else{
+      _isLoading = true;
+    }
+    update();
+
+
+    await Future.delayed(const Duration(seconds: 2), (){
+      _responseModel = ResponseModel(true, "success");
+      if(markerLoad){
+      _loading = false;
+    }
+    else{
+      _isLoading = false;
+    }
+    
+    });
+    update();
+
+
+    return _responseModel;
   }
 }

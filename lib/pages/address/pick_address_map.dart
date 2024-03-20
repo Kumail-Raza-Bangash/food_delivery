@@ -118,37 +118,50 @@ class _PickAddressMapState extends State<PickAddressMap> {
                     ),
                   ),
                   Positioned(
-                    bottom: 200,
+                    bottom: Dimensions.height20 * 4,
                     left: Dimensions.width20,
                     right: Dimensions.width20,
-                    child: CustomButton(
-                      buttonText: "Pick Address",
-                      onPressed: locationController.loading
-                          ? () {
-                              print("Should be null value");
-                            }
-                          : () {
-                              if (locationController.pickPosition.latitude !=
-                                      0 &&
-                                  locationController.pickPlacemark.name !=
-                                      null) {
-                                if (widget.fromAddress) {
-                                  if (widget.googleMapController != null) {
-                                    print("Now you can click on this");
-                                    widget.googleMapController!.moveCamera(
-                                        CameraUpdate.newCameraPosition(
-                                            CameraPosition(
-                                                target: LatLng(
-                                      locationController.pickPosition.longitude,
-                                      locationController.pickPosition.latitude,
-                                    ))));
-                                    locationController.setAddAddressData();
-                                  }
-                                  Get.toNamed(RouteHelper.getAddressPage());
-                                }
-                              }
-                            },
-                    ),
+                    child: locationController.isLoading
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : CustomButton(
+                            buttonText: locationController.inZone
+                                ? widget.fromAddress
+                                    ? "Pick Address"
+                                    : "Pick Location"
+                                : "Service is not available in your area",
+                            onPressed: (locationController.buttonDisabled || locationController.loading)
+                                ? null
+                                : () {
+                                    if (locationController
+                                                .pickPosition.latitude !=
+                                            0 &&
+                                        locationController.pickPlacemark.name !=
+                                            null) {
+                                      if (widget.fromAddress) {
+                                        if (widget.googleMapController !=
+                                            null) {
+                                          print("Now you can click on this");
+                                          widget.googleMapController!
+                                              .moveCamera(CameraUpdate
+                                                  .newCameraPosition(
+                                                      CameraPosition(
+                                                          target: LatLng(
+                                            locationController
+                                                .pickPosition.longitude,
+                                            locationController
+                                                .pickPosition.latitude,
+                                          ))));
+                                          locationController
+                                              .setAddAddressData();
+                                        }
+                                        Get.toNamed(
+                                            RouteHelper.getAddressPage());
+                                      }
+                                    }
+                                  },
+                          ),
                   ),
                 ],
               ),
