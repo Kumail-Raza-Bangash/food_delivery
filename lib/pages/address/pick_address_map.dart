@@ -134,7 +134,16 @@ class _PickAddressMapState extends State<PickAddressMap> {
                                 if (widget.fromAddress) {
                                   if (widget.googleMapController != null) {
                                     print("Now you can click on this");
+                                    widget.googleMapController!.moveCamera(
+                                        CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                                target: LatLng(
+                                      locationController.pickPosition.longitude,
+                                      locationController.pickPosition.latitude,
+                                    ))));
+                                    locationController.setAddAddressData();
                                   }
+                                  Get.back();
                                 }
                               }
                             },
