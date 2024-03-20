@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_delivery/base/custom_button.dart';
 import 'package:food_delivery/controllers/location_controller.dart';
 import 'package:food_delivery/routes/route_helper.dart';
@@ -105,7 +106,7 @@ class _PickAddressMapState extends State<PickAddressMap> {
                         ),
                         Expanded(
                           child: Text(
-                            "${locationController.pickPlacemark.name ?? ''}",
+                            locationController.pickPlacemark.name ?? '',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: Dimensions.font16,
@@ -122,7 +123,7 @@ class _PickAddressMapState extends State<PickAddressMap> {
                     left: Dimensions.width20,
                     right: Dimensions.width20,
                     child: locationController.isLoading
-                        ? Center(
+                        ? const Center(
                             child: CircularProgressIndicator(),
                           )
                         : CustomButton(
@@ -131,7 +132,8 @@ class _PickAddressMapState extends State<PickAddressMap> {
                                     ? "Pick Address"
                                     : "Pick Location"
                                 : "Service is not available in your area",
-                            onPressed: (locationController.buttonDisabled || locationController.loading)
+                            onPressed: (locationController.buttonDisabled ||
+                                    locationController.loading)
                                 ? null
                                 : () {
                                     if (locationController
