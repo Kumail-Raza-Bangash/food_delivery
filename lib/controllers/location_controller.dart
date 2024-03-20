@@ -216,7 +216,18 @@ class LocationController extends GetxController implements GetxService {
       _inZone = false;
       _responseModel = ResponseModel(true, response.statusText!);
     }
-    print(response.statusCode);
+
+
+    if(markerLoad){
+      _loading = false;
+    }
+    else{
+      _isLoading = false;
+    }
+    
+
+
+    //print("Zone response code is "+response.statusCode.toString());
     update();
 
 
