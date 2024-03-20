@@ -1,4 +1,6 @@
 
+// ignore_for_file: prefer_final_fields
+
 class ResponseModel{
   bool _isSuccess;
   String _message;

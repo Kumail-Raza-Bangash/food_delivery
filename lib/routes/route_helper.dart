@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:food_delivery/pages/address/add_address_page.dart';
 import 'package:food_delivery/pages/address/pick_address_map.dart';
 import 'package:food_delivery/pages/auth/sign_in_page.dart';

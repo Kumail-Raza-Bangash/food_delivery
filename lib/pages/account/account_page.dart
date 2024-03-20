@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unnecessary_const, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery/base/custom_loader.dart';
@@ -218,10 +218,10 @@ class AccountPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(Dimensions.radius20),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           fit: BoxFit.cover,
                           image:
-                              AssetImage("assets/image/signintocontinue.png"),
+                              const AssetImage("assets/image/signintocontinue.png"),
                         ),
                       )),
                   SizedBox(

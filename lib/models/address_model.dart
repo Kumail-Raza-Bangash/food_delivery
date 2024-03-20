@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this, prefer_collection_literals
+
 class AddressModel {
   late int? _id;
   late String _addressType;
@@ -7,7 +9,7 @@ class AddressModel {
   late String _latitude;
   late String _longitude;
 
-  AddressModel({
+  AddressModel(required String latitude, required String longitude, required String addressType, {
     id,
     required addressType,
     contactPersonName,

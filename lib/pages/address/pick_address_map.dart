@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery/base/custom_button.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings, sized_box_for_whitespace, no_leading_underscores_for_local_identifiers, prefer_collection_literals, prefer_is_empty
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';

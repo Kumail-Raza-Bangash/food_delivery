@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace, no_leading_underscores_for_local_identifiers, avoid_print
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/base/custom_loader.dart';

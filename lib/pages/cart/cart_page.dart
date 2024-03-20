@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_is_empty, prefer_const_constructors, no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery/base/no_data_page.dart';
 import 'package:food_delivery/controllers/auth_controller.dart';

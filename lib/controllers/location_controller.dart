@@ -8,6 +8,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/src/places.dart';
 
 class LocationController extends GetxController implements GetxService {
   LocationRepo locationRepo;
@@ -45,6 +46,94 @@ class LocationController extends GetxController implements GetxService {
   bool get isLoading => _isLoading;
   bool get inZone => _inZone;
   bool get buttonDisabled => _buttonDisabled;
+
+  //SAVE THE GOOGLE MAP SUGGESTION FOR ADDRESS//
+  List<Prediction> _predictionList = [];
+  Future<void> getCurrentLocation(bool fromAddress,
+  {required GoogleMapController mapController,
+  LatLng? defaultLatLng, bool notify = true}) async {
+    _loading = true;
+    if(notify){
+      update();
+    }
+    
+    AddressModel _addressModel;
+    late Position _myPosition;
+    Position _test;
+
+    //Position newLocalData = await Geolocator.getCurrentPosition();
+    //_myPosition = newLocalData;
+
+    Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+    .then((Position position) async {
+      _myPosition = position;
+
+      if(fromAddress){
+        _position = _myPosition;
+      }
+      else{
+        _pickPosition = _myPosition;
+      }
+      mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: LatLng(_myPosition.latitude, _myPosition.longitude),),
+      ));
+
+      Placemark _myPlaceMark;
+      try{
+        if(!GetPlatform.isWeb){
+          List<Placemark> placeMarks = await placemarkFromCoordinates(_myPosition.latitude, _myPosition.longitude);
+          _myPlaceMark = placeMarks.first;
+        }
+        else {
+          String _address = await getAddressfromGeocode(LatLng(_myPosition.latitude, _myPosition.longitude));
+        _myPlaceMark = Placemark(name: _address, locality: '', postalCode: '');
+        }
+      }
+      catch(e){
+        String _address = await getAddressfromGeocode(LatLng(_myPosition.latitude, _myPosition.longitude));
+        _myPlaceMark = Placemark(name: _address, locality: '', postalCode: '', country: '');
+      }
+
+      fromAddress ? _placemark = _myPlaceMark : _pickPlacemark = _myPlaceMark;
+      //ResponseModel _responseModel = await getZone(_myPosition.latitude.toString(), _myPosition.longitude.toString(), true);
+      //_buttonDisabled = !_responseModel.isSuccess;
+      _addressModel = AddressModel(
+        latitude: _myPosition.latitude.toString(),
+        longitude: _myPosition.longitude.toString(),
+        addressType: '${_myPlaceMark.name ?? ''}',
+        '${_myPlaceMark.locality ?? ''}',
+        '${_myPlaceMark.postalCode ?? ''}',
+        '${_myPlaceMark.country ?? ''}',
+      );
+
+      _loading = false;
+      update();
+
+      print("ha"+_myPosition.toString());
+
+    }).catchError((e){
+      _myPosition = Position(
+         longitude: defaultLatLng != null ? defaultLatLng.longitude : defaultLatLng!.longitude.toDouble(),
+         latitude: defaultLatLng != null ? defaultLatLng.latitude : defaultLatLng!.latitude.toDouble(),
+         timestamp: DateTime.now(),
+         accuracy: 1,
+         altitude: 1,
+         altitudeAccuracy: 1,
+         heading: 1,
+         headingAccuracy: 1,
+         speed: 1,
+         speedAccuracy: 1,
+        );
+
+        print("error" + e);
+    });
+
+
+  }
+
+
+
+
 
   void setMapController(GoogleMapController mapController) {
     _mapController = mapController;
@@ -224,8 +313,6 @@ class LocationController extends GetxController implements GetxService {
     else{
       _isLoading = false;
     }
-    
-
 
     //print("Zone response code is "+response.statusCode.toString());
     update();
@@ -233,4 +320,19 @@ class LocationController extends GetxController implements GetxService {
 
     return _responseModel;
   }
+
+  searchLocation(BuildContext context, String text) async {
+    if(text.isNotEmpty){
+      Response response = await locationRepo.searchLocation(text);
+      if(response.statusCode == 200 && response.body['status']==['OK']){
+        _predictionList = [];
+        response.body['predictions'].forEach((prediction) => _predictionList.add(Prediction.fromJson(prediction)));
+      }
+    }
+    else{
+
+    }
+  }
+
+
 }
