@@ -3,6 +3,7 @@ import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/routes/route_helper.dart';
+import 'package:food_delivery/utils/colors.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery/helper/dependencies.dart' as dep;
 
@@ -26,6 +27,10 @@ class MyApp extends StatelessWidget {
       return GetBuilder<PopularProductController>(builder: (_){
         return GetBuilder<RecommendedProductController>(builder: (_){
           return GetMaterialApp(
+            theme: ThemeData(
+              primaryColor: AppColors.mainColor,
+              fontFamily: "Lato",
+            ),
             title: 'Food Delivery',
             //home: SignInPage(),
             //home: SplashScreen(),

@@ -64,8 +64,8 @@ android {
             // signingConfig signingConfigs.release
             // signingConfig signingConfigs.config
             signingConfig signingConfigs.debug
-            shrinkResources false
-            minifyEnabled false
+            // shrinkResources false
+            // minifyEnabled false
         }
     }
 }
