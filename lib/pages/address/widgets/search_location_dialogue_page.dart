@@ -38,18 +38,43 @@ class LocationDialogue extends StatelessWidget {
               autofocus: true,
               textCapitalization: TextCapitalization.words,
               keyboardType: TextInputType.streetAddress,
+              decoration: InputDecoration(
+                hintText: "search location",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(Dimensions.radius20/2),
+                  borderSide: const BorderSide(
+                    style: BorderStyle.none,
+                    width: 0,
+                  ),
+                ),
+                hintStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: Theme.of(context).disabledColor,
+                          fontSize: Dimensions.font16,
+                ),
+              )
             ),
             suggestionsCallback: (String pattern) async {
               return await Get.find<LocationController>().searchLocation(context, pattern);
             }, 
             itemBuilder: (context, Prediction suggestion) {
-              return const Row(
-                children: [
-                  Icon(Icons.location_on),
-                  Expanded(
-                    child: Text("New Location"),
-                  )
-                ],
+              return Padding(
+                padding: EdgeInsets.all(Dimensions.width10),
+                child: Row(
+                  children: [
+                    const Icon(Icons.location_on),
+                    Expanded(
+                      child: Text(
+                        suggestion.description!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
+                          fontSize: Dimensions.font16,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               );
             }, 
             onSuggestionSelected: (suggestion){

@@ -14,19 +14,18 @@ class LocationRepo {
     required this.sharedPreferences,
   });
 
-  Future<Response> getAddressfromGeocode (LatLng latlng) async {
-    return await apiClient.getData(
-      '${AppConstant.GEOCODE_URI}'
-      '?lat=${latlng.latitude}&lng=${latlng.longitude}'
-    );
+  Future<Response> getAddressfromGeocode(LatLng latlng) async {
+    return await apiClient.getData('${AppConstant.GEOCODE_URI}'
+        '?lat=${latlng.latitude}&lng=${latlng.longitude}');
   }
 
-  String getUserAddress(){
-    return sharedPreferences.getString(AppConstant.USER_ADDRESS)??"";
+  String getUserAddress() {
+    return sharedPreferences.getString(AppConstant.USER_ADDRESS) ?? "";
   }
 
   Future<Response> addAddress(AddressModel addressModel) async {
-    return await apiClient.postData(AppConstant.ADD_USER_ADDRESS, addressModel.toJson());
+    return await apiClient.postData(
+        AppConstant.ADD_USER_ADDRESS, addressModel.toJson());
   }
 
   Future<Response> getAllAddress() async {
@@ -45,5 +44,4 @@ class LocationRepo {
   Future<Response> searchLocation(String text) async {
     return await apiClient.getData('${AppConstant.ZONE_URI}?search_text=$text');
   }
-
 }
