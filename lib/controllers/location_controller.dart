@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery/data/api/api_checker.dart';
 import 'package:food_delivery/data/repository/location_repo.dart';
 import 'package:food_delivery/models/address_model.dart';
 import 'package:food_delivery/models/response_model.dart';
@@ -101,9 +102,9 @@ class LocationController extends GetxController implements GetxService {
         latitude: _myPosition.latitude.toString(),
         longitude: _myPosition.longitude.toString(),
         addressType: '${_myPlaceMark.name ?? ''}',
-        '${_myPlaceMark.locality ?? ''}',
-        '${_myPlaceMark.postalCode ?? ''}',
-        '${_myPlaceMark.country ?? ''}',
+        //'${_myPlaceMark.locality ?? ''}',
+        //'${_myPlaceMark.postalCode ?? ''}',
+        //'${_myPlaceMark.country ?? ''}',
       );
 
       _loading = false;
@@ -321,18 +322,21 @@ class LocationController extends GetxController implements GetxService {
     return _responseModel;
   }
 
-  searchLocation(BuildContext context, String text) async {
+  Future<List<Prediction>> searchLocation(BuildContext context, String text) async {
     if(text.isNotEmpty){
       Response response = await locationRepo.searchLocation(text);
       if(response.statusCode == 200 && response.body['status']==['OK']){
         _predictionList = [];
         response.body['predictions'].forEach((prediction) => _predictionList.add(Prediction.fromJson(prediction)));
       }
+      else{
+        ApiChecker.checkApi(response);
     }
-    else{
-
     }
+    return _predictionList;
   }
+
+
 
 
 }

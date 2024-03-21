@@ -9,7 +9,7 @@ class AddressModel {
   late String _latitude;
   late String _longitude;
 
-  AddressModel(required String latitude, required String longitude, required String addressType, {
+  AddressModel({
     id,
     required addressType,
     contactPersonName,

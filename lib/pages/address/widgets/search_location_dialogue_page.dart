@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:food_delivery/controllers/location_controller.dart';
 import 'package:food_delivery/utils/dimensions.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/src/places.dart';
 
 class LocationDialogue extends StatelessWidget {
   
@@ -36,11 +39,18 @@ class LocationDialogue extends StatelessWidget {
               textCapitalization: TextCapitalization.words,
               keyboardType: TextInputType.streetAddress,
             ),
-            suggestionsCallback: (String pattern) {
-              
+            suggestionsCallback: (String pattern) async {
+              return await Get.find<LocationController>().searchLocation(context, pattern);
             }, 
-            itemBuilder: (BuildContext context, Object? itemData) {
-              
+            itemBuilder: (context, Prediction suggestion) {
+              return const Row(
+                children: [
+                  Icon(Icons.location_on),
+                  Expanded(
+                    child: Text("New Location"),
+                  )
+                ],
+              );
             }, 
             onSuggestionSelected: (suggestion){
 
