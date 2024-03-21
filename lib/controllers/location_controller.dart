@@ -51,13 +51,14 @@ class LocationController extends GetxController implements GetxService {
   //SAVE THE GOOGLE MAP SUGGESTION FOR ADDRESS//
   List<Prediction> _predictionList = [];
   Future<void> getCurrentLocation(bool fromAddress,
-  {required GoogleMapController mapController,
-  LatLng? defaultLatLng, bool notify = true}) async {
+      {required GoogleMapController mapController,
+      LatLng? defaultLatLng,
+      bool notify = true}) async {
     _loading = true;
-    if(notify){
+    if (notify) {
       update();
     }
-    
+
     AddressModel _addressModel;
     late Position _myPosition;
     Position _test;
@@ -66,33 +67,37 @@ class LocationController extends GetxController implements GetxService {
     //_myPosition = newLocalData;
 
     Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-    .then((Position position) async {
+        .then((Position position) async {
       _myPosition = position;
 
-      if(fromAddress){
+      if (fromAddress) {
         _position = _myPosition;
-      }
-      else{
+      } else {
         _pickPosition = _myPosition;
       }
       mapController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(_myPosition.latitude, _myPosition.longitude),),
+        CameraPosition(
+          target: LatLng(_myPosition.latitude, _myPosition.longitude),
+        ),
       ));
 
       Placemark _myPlaceMark;
-      try{
-        if(!GetPlatform.isWeb){
-          List<Placemark> placeMarks = await placemarkFromCoordinates(_myPosition.latitude, _myPosition.longitude);
+      try {
+        if (!GetPlatform.isWeb) {
+          List<Placemark> placeMarks = await placemarkFromCoordinates(
+              _myPosition.latitude, _myPosition.longitude);
           _myPlaceMark = placeMarks.first;
+        } else {
+          String _address = await getAddressfromGeocode(
+              LatLng(_myPosition.latitude, _myPosition.longitude));
+          _myPlaceMark =
+              Placemark(name: _address, locality: '', postalCode: '');
         }
-        else {
-          String _address = await getAddressfromGeocode(LatLng(_myPosition.latitude, _myPosition.longitude));
-        _myPlaceMark = Placemark(name: _address, locality: '', postalCode: '');
-        }
-      }
-      catch(e){
-        String _address = await getAddressfromGeocode(LatLng(_myPosition.latitude, _myPosition.longitude));
-        _myPlaceMark = Placemark(name: _address, locality: '', postalCode: '', country: '');
+      } catch (e) {
+        String _address = await getAddressfromGeocode(
+            LatLng(_myPosition.latitude, _myPosition.longitude));
+        _myPlaceMark = Placemark(
+            name: _address, locality: '', postalCode: '', country: '');
       }
 
       fromAddress ? _placemark = _myPlaceMark : _pickPlacemark = _myPlaceMark;
@@ -110,31 +115,28 @@ class LocationController extends GetxController implements GetxService {
       _loading = false;
       update();
 
-      print("ha"+_myPosition.toString());
-
-    }).catchError((e){
+      print("ha" + _myPosition.toString());
+    }).catchError((e) {
       _myPosition = Position(
-         longitude: defaultLatLng != null ? defaultLatLng.longitude : defaultLatLng!.longitude.toDouble(),
-         latitude: defaultLatLng != null ? defaultLatLng.latitude : defaultLatLng!.latitude.toDouble(),
-         timestamp: DateTime.now(),
-         accuracy: 1,
-         altitude: 1,
-         altitudeAccuracy: 1,
-         heading: 1,
-         headingAccuracy: 1,
-         speed: 1,
-         speedAccuracy: 1,
-        );
+        longitude: defaultLatLng != null
+            ? defaultLatLng.longitude
+            : defaultLatLng!.longitude.toDouble(),
+        latitude: defaultLatLng != null
+            ? defaultLatLng.latitude
+            : defaultLatLng!.latitude.toDouble(),
+        timestamp: DateTime.now(),
+        accuracy: 1,
+        altitude: 1,
+        altitudeAccuracy: 1,
+        heading: 1,
+        headingAccuracy: 1,
+        speed: 1,
+        speedAccuracy: 1,
+      );
 
-        print("error" + e);
+      print("error" + e);
     });
-
-
   }
-
-
-
-
 
   void setMapController(GoogleMapController mapController) {
     _mapController = mapController;
@@ -174,8 +176,11 @@ class LocationController extends GetxController implements GetxService {
           );
         }
 
-        ResponseModel _responseModel = await getZone(position.target.latitude.toString(), position.target.longitude.toString(), false);
-        _buttonDisabled =! _responseModel.isSuccess;
+        ResponseModel _responseModel = await getZone(
+            position.target.latitude.toString(),
+            position.target.longitude.toString(),
+            false);
+        _buttonDisabled = !_responseModel.isSuccess;
 
         if (_changeAddress) {
           String _address = await getAddressfromGeocode(
@@ -289,54 +294,85 @@ class LocationController extends GetxController implements GetxService {
 
   Future<ResponseModel> getZone(String lat, String lng, bool markerLoad) async {
     late ResponseModel _responseModel;
-    if(markerLoad){
+    if (markerLoad) {
       _loading = true;
-    }
-    else{
+    } else {
       _isLoading = true;
     }
     update();
-    
+
     Response response = await locationRepo.getZone(lat, lng);
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       _inZone = true;
       _responseModel = ResponseModel(true, response.body['zone_id'].toString());
-    }
-    else {
+    } else {
       _inZone = false;
       _responseModel = ResponseModel(true, response.statusText!);
     }
 
-
-    if(markerLoad){
+    if (markerLoad) {
       _loading = false;
-    }
-    else{
+    } else {
       _isLoading = false;
     }
 
     //print("Zone response code is "+response.statusCode.toString());
     update();
 
-
     return _responseModel;
   }
 
-  Future<List<Prediction>> searchLocation(BuildContext context, String text) async {
-    if(text.isNotEmpty){
+  Future<List<Prediction>> searchLocation(
+      BuildContext context, String text) async {
+    if (text.isNotEmpty) {
       Response response = await locationRepo.searchLocation(text);
-      if(response.statusCode == 200 && response.body['status']==['OK']){
+      if (response.statusCode == 200 && response.body['status'] == ['OK']) {
         _predictionList = [];
-        response.body['predictions'].forEach((prediction) => _predictionList.add(Prediction.fromJson(prediction)));
-      }
-      else{
+        response.body['predictions'].forEach((prediction) =>
+            _predictionList.add(Prediction.fromJson(prediction)));
+      } else {
         ApiChecker.checkApi(response);
-    }
+      }
     }
     return _predictionList;
   }
 
+  Future<void> setLocation(
+      String placeID, String address, GoogleMapController mapController) async {
+    _loading = true;
+    update();
 
+    PlacesDetailsResponse detail;
+    Response response = await locationRepo.setLocation(placeID);
+    detail = PlacesDetailsResponse.fromJson(response.body);
 
-
+    _pickPosition = Position(
+      latitude: detail.result.geometry!.location.lat,
+      longitude: detail.result.geometry!.location.lng,
+      timestamp: DateTime.now(),
+      accuracy: 1,
+      altitude: 1,
+      altitudeAccuracy: 1,
+      heading: 1,
+      headingAccuracy: 1,
+      speed: 1,
+      speedAccuracy: 1,
+    );
+    _pickPlacemark = Placemark(name: address);
+    _changeAddress = false;
+    if (!mapController.isNull) {
+      mapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(
+              detail.result.geometry!.location.lat,
+              detail.result.geometry!.location.lng,
+            ), zoom: 17,
+          ),
+        ),
+      );
+    }
+    _loading = false;
+    update();
+  }
 }
