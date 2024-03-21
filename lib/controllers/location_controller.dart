@@ -184,10 +184,16 @@ class LocationController extends GetxController implements GetxService {
 
         if (_changeAddress) {
           String _address = await getAddressfromGeocode(
-              LatLng(position.target.latitude, position.target.longitude));
+            LatLng(
+              position.target.latitude,
+              position.target.longitude,
+            ),
+          );
           fromAddress
               ? _placemark = Placemark(name: _address)
               : _pickPlacemark = Placemark(name: _address);
+        } else {
+          _changeAddress = true;
         }
       } catch (e) {
         print(e.toString());
@@ -367,7 +373,8 @@ class LocationController extends GetxController implements GetxService {
             target: LatLng(
               detail.result.geometry!.location.lat,
               detail.result.geometry!.location.lng,
-            ), zoom: 17,
+            ),
+            zoom: 17,
           ),
         ),
       );
